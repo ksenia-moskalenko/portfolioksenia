@@ -7,5 +7,162 @@
     <link rel="stylesheet" href="stylesheets/style.css" />
     <script defer src="javascripts/scripts.js"></script>
   </head>
-  <body></body>
+  <body>
+    <!-- Кастомный курсор -->
+    <div class="cursor" id="cursor"></div>
+
+    <!-- Навигация -->
+    <header class="nav">
+      <a href="#about" class="nav-link" data-scramble>about</a>
+      <a href="#contact" class="nav-link" data-scramble>contact</a>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-image">
+        <img src="hero.jpg" alt="Ksenia Moskalenko" />
+      </div>
+
+      <h1 class="hero-title">
+        <span class="title-part">KSENIA</span>
+        <span class="title-part">MOSKALENKO</span>
+      </h1>
+    </section>
+
+    <!-- STICKY секция с проектами -->
+    <section class="projects" id="work">
+      <div class="projects-sticky">
+        <div class="project-list" id="projectList">
+          <!-- 01 -->
+          <div class="project" data-index="1">
+            <span class="project-num">(01)</span>
+            <a
+              href="#"
+              class="project-link"
+              data-scramble
+              data-image="img1.jpg"
+            >
+              <span class="project-name">NSStudio (student project)</span>
+              <span class="project-date">2025 september</span>
+              <span class="project-type">(cd)</span>
+            </a>
+          </div>
+          <!-- 02 -->
+          <div class="project" data-index="2">
+            <span class="project-num">(02)</span>
+            <a
+              href="#"
+              class="project-link"
+              data-scramble
+              data-image="img2.jpg"
+            >
+              <span class="project-name"
+                >NeuroSaund Capsule (student project)</span
+              >
+              <span class="project-date">2025 december</span>
+              <span class="project-type">(cd)</span>
+            </a>
+          </div>
+          <!-- 03 -->
+          <div class="project" data-index="3">
+            <span class="project-num">(03)</span>
+            <a
+              href="#"
+              class="project-link"
+              data-scramble
+              data-image="img3.jpg"
+            >
+              <span class="project-name">«NeuroSound» (student project)</span>
+              <span class="project-date">2025 december</span>
+              <span class="project-type">(web poster)</span>
+            </a>
+          </div>
+          <!-- 04 -->
+          <div class="project" data-index="4">
+            <span class="project-num">(04)</span>
+            <a
+              href="#"
+              class="project-link"
+              data-scramble
+              data-image="img4.jpg"
+            >
+              <span class="project-name">Project name four</span>
+              <span class="project-date">2026 january</span>
+              <span class="project-type">(cd)</span>
+            </a>
+          </div>
+          <!-- 05 -->
+          <div class="project" data-index="5">
+            <span class="project-num">(05)</span>
+            <a
+              href="#"
+              class="project-link"
+              data-scramble
+              data-image="img5.jpg"
+            >
+              <span class="project-name">Project name five</span>
+              <span class="project-date">2026 february</span>
+              <span class="project-type">(web poster)</span>
+            </a>
+          </div>
+          <!-- 06 -->
+          <div class="project" data-index="6">
+            <span class="project-num">(06)</span>
+            <a
+              href="#"
+              class="project-link"
+              data-scramble
+              data-image="img6.jpg"
+            >
+              <span class="project-name">Project name six</span>
+              <span class="project-date">2026 march</span>
+              <span class="project-type">(cd)</span>
+            </a>
+          </div>
+          <!-- 07 -->
+          <div class="project" data-index="7">
+            <span class="project-num">(07)</span>
+            <a
+              href="#"
+              class="project-link"
+              data-scramble
+              data-image="img7.jpg"
+            >
+              <span class="project-name">Project name seven</span>
+              <span class="project-date">2026 april</span>
+              <span class="project-type">(web poster)</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT I DO -->
+    <section class="what-i-do">
+      <h2 class="big-heading" data-scramble>WHAT I DO</h2>
+      <div class="side-list">
+        <span data-scramble>design</span>
+        <span data-scramble>creative design</span>
+        <span data-scramble>web design</span>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact" id="contact">
+      <h2 class="big-heading" data-scramble>CONTACT</h2>
+      <div class="side-list">
+        <a href="mailto:email@example.com" data-scramble>email</a>
+        <a href="#" data-scramble>telegram</a>
+        <a href="#" data-scramble>instagram</a>
+        <a href="#" data-scramble>pinterest</a>
+      </div>
+    </section>
+
+    <!-- Плавающая картинка при наведении на ссылку-проект -->
+    <div class="hover-image" id="hoverImage">
+      <div class="hover-image-inner"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
 </html>

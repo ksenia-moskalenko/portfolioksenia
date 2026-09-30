@@ -1,0 +1,313 @@
+/* ---------- RESET ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: #000;
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+}
+
+body {
+  cursor: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: none;
+}
+
+/* ---------- CUSTOM CURSOR ---------- */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fff;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  transition:
+    width 0.25s ease,
+    height 0.25s ease,
+    transform 0.1s ease-out;
+  will-change: transform;
+}
+
+.cursor.hover {
+  width: 60px;
+  height: 60px;
+}
+
+/* ---------- NAV ---------- */
+.nav {
+  position: fixed;
+  top: 28px;
+  right: 40px;
+  display: flex;
+  gap: 22px;
+  font-size: 14px;
+  z-index: 100;
+}
+
+.nav-link {
+  position: relative;
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 45%;
+  height: 100%;
+  overflow: hidden; /* Чтобы картинка не вылезала за пределы блока */
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Картинка заполнит блок, сохраняя пропорции */
+  filter: grayscale(100%); /* Оставляем ч/б эффект, как в макете */
+}
+
+.hero-title {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  font-family: "Anton", sans-serif;
+  font-size: clamp(80px, 18vw, 300px);
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  padding: 0 10px;
+  pointer-events: none;
+}
+
+.title-part {
+  display: inline-block;
+}
+
+/* ---------- PROJECTS (sticky) ---------- */
+.projects {
+  position: relative;
+  height: 400vh; /* высота скролла для 7 блоков */
+}
+
+.projects-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.project-list {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.project {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.project.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.project-num {
+  position: absolute;
+  font-size: 14px;
+  color: #fff;
+}
+
+/* Разное позиционирование для разнобоя, как в макете */
+.project[data-index="1"] .project-num {
+  top: 50%;
+  left: 30%;
+}
+.project[data-index="1"] .project-link {
+  top: 54%;
+  left: 35%;
+}
+
+.project[data-index="2"] .project-num {
+  top: 50%;
+  left: 50%;
+}
+.project[data-index="2"] .project-link {
+  top: 54%;
+  left: 55%;
+}
+
+.project[data-index="3"] .project-num {
+  top: 62%;
+  left: 26%;
+}
+.project[data-index="3"] .project-link {
+  top: 66%;
+  left: 30%;
+}
+
+.project[data-index="4"] .project-num {
+  top: 40%;
+  left: 60%;
+}
+.project[data-index="4"] .project-link {
+  top: 44%;
+  left: 63%;
+}
+
+.project[data-index="5"] .project-num {
+  top: 70%;
+  left: 40%;
+}
+.project[data-index="5"] .project-link {
+  top: 74%;
+  left: 44%;
+}
+
+.project[data-index="6"] .project-num {
+  top: 35%;
+  left: 20%;
+}
+.project[data-index="6"] .project-link {
+  top: 39%;
+  left: 24%;
+}
+
+.project[data-index="7"] .project-num {
+  top: 60%;
+  left: 70%;
+}
+.project[data-index="7"] .project-link {
+  top: 64%;
+  left: 73%;
+}
+
+.project-link {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+.project-name {
+  font-weight: 400;
+}
+.project-date {
+  font-weight: 400;
+}
+.project-type {
+  font-weight: 400;
+}
+
+/* ---------- WHAT I DO / CONTACT ---------- */
+.what-i-do,
+.contact {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 40px;
+  gap: 80px;
+}
+
+.big-heading {
+  font-family: "Anton", sans-serif;
+  font-size: clamp(60px, 12vw, 200px);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.side-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 16px;
+  align-self: flex-end;
+  padding-bottom: 20px;
+}
+
+.what-i-do .big-heading {
+  transform: translateX(-10%);
+}
+.contact .big-heading {
+  transform: translateX(-15%);
+}
+
+/* ---------- HOVER IMAGE ---------- */
+.hover-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 320px;
+  height: 400px;
+  pointer-events: none;
+  z-index: 500;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  transform: translate(-50%, -50%);
+}
+
+.hover-image.visible {
+  opacity: 1;
+}
+
+.hover-image-inner {
+  width: 100%;
+  height: 100%;
+  background: #333;
+  background-image: linear-gradient(
+    135deg,
+    #2a2a2a 25%,
+    #3a3a3a 25%,
+    #3a3a3a 50%,
+    #2a2a2a 50%,
+    #2a2a2a 75%,
+    #3a3a3a 75%
+  );
+  background-size: 40px 40px;
+  filter: grayscale(100%);
+}
+
+/* Скрываем стандартный курсор при наведении на hover-image */
+.hover-image.visible ~ * {
+  cursor: none;
+}
