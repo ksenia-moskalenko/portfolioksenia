@@ -102,33 +102,6 @@ document.querySelectorAll(".project-link").forEach((link) => {
 });
 
 /* =========================================================
-   3. STICKY SCROLL — переключение проектов
-   ========================================================= */
-const projectsSection = document.querySelector(".projects");
-const projects = document.querySelectorAll(".project");
-const totalProjects = projects.length;
-
-function updateActiveProject() {
-  const rect = projectsSection.getBoundingClientRect();
-  const sectionHeight = projectsSection.offsetHeight - window.innerHeight;
-  const scrolled = -rect.top;
-  const progress = Math.min(Math.max(scrolled / sectionHeight, 0), 1);
-
-  const activeIndex = Math.min(
-    Math.floor(progress * totalProjects),
-    totalProjects - 1,
-  );
-
-  projects.forEach((p, i) => {
-    p.classList.toggle("active", i === activeIndex);
-  });
-}
-
-window.addEventListener("scroll", updateActiveProject);
-window.addEventListener("resize", updateActiveProject);
-updateActiveProject();
-
-/* =========================================================
    4. HOVER IMAGE — всплывающая картинка при наведении на ссылку
    ========================================================= */
 const hoverImage = document.getElementById("hoverImage");
@@ -165,3 +138,137 @@ function animateHoverImage() {
   requestAnimationFrame(animateHoverImage);
 }
 animateHoverImage();
+
+/* =========================================================
+   5. HERO TITLE — единый масштаб по ширине + вертикальное раскрытие
+   ========================================================= */
+const heroTitle = document.querySelector(".hero-title");
+const titleParts = document.querySelectorAll(".title-part");
+const reduceMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)",
+).matches;
+
+// Насколько каждое слово уходит вниз при скролле, px. Оба слова движутся
+// только вниз, но с разной скоростью, поэтому они расходятся.
+// Первый элемент — KSENIA, второй — MOSKALENKO.
+const SPREAD_PX = [200, 200];
+// Насколько буквы вытягиваются по вертикали к концу скролла.
+const STRETCH_Y = 0.5;
+
+let fitScaleX = 1;
+let spreadProgress = 0;
+
+// Ширина текста без учёта transform самого элемента. Замеряем на скрытом
+// клоне с той же типографикой: ширина .title-part иначе обрезается
+// правой границей контейнера и scaleX вышел бы равным 1.
+let measureEl = null;
+
+function measureNaturalWidth(part) {
+  if (!measureEl) {
+    measureEl = document.createElement("span");
+    measureEl.style.cssText =
+      "position:absolute;left:-99999px;top:0;white-space:nowrap;" +
+      "visibility:hidden;pointer-events:none;";
+    document.body.appendChild(measureEl);
+  }
+
+  const cs = getComputedStyle(part);
+  [
+    "fontFamily",
+    "fontSize",
+    "fontWeight",
+    "fontStyle",
+    "fontStretch",
+    "fontVariationSettings",
+    "fontFeatureSettings",
+    "fontOpticalSizing",
+    "letterSpacing",
+    "wordSpacing",
+    "textTransform",
+  ].forEach((prop) => {
+    measureEl.style[prop] = cs[prop];
+  });
+
+  measureEl.textContent = part.textContent;
+  return measureEl.getBoundingClientRect().width;
+}
+
+// Оба слова сжимаются ОДИНАКОВЫМ коэффициентом: берём масштаб от суммы их
+// натуральных ширин, чтобы KSENIA и MOSKALENKO выглядели одинаково
+// и при этом ровно заполняли ширину экрана.
+function fitTitle() {
+  if (!heroTitle || titleParts.length === 0) return;
+
+  const contentWidth = heroTitle.clientWidth - 20; // 10px padding с каждой стороны
+  if (contentWidth <= 0) return;
+
+  let totalNatural = 0;
+  const widths = [];
+
+  titleParts.forEach((part) => {
+    const natural = measureNaturalWidth(part);
+    widths.push(natural);
+    totalNatural += natural;
+  });
+
+  if (totalNatural <= 0) return;
+
+  const scale = contentWidth / totalNatural;
+  if (!Number.isFinite(scale) || scale <= 0) return;
+
+  fitScaleX = scale;
+  renderTitle();
+}
+
+// Единственное место, где пишется transform: подгонка по ширине (scaleX)
+// и вертикальное раскрытие (translateY + scaleY) собираются вместе,
+// чтобы не затирать друг друга.
+function renderTitle() {
+  titleParts.forEach((part, i) => {
+    const dy = reduceMotion ? 0 : spreadProgress * SPREAD_PX[i];
+    const sy = reduceMotion ? 1 : 1 + spreadProgress * STRETCH_Y;
+
+    part.style.transform = `translateY(${dy}px) scaleX(${fitScaleX}) scaleY(${sy})`;
+  });
+}
+
+// Прокручивая секцию hero мимо, слова расходятся по вертикали и вытягиваются
+// вниз. Горизонтальный масштаб не трогаем — текст не уходит за края экрана
+// и не расползается в стороны.
+function updateHeroTitle() {
+  if (!heroTitle) return;
+
+  const hero = heroTitle.closest(".hero");
+  if (!hero) return;
+
+  const rect = hero.getBoundingClientRect();
+  const total = hero.offsetHeight || window.innerHeight;
+
+  spreadProgress = Math.min(Math.max(-rect.top / total, 0), 1);
+  renderTitle();
+}
+
+let titleTicking = false;
+
+function onTitleScroll() {
+  if (titleTicking) return;
+  titleTicking = true;
+  requestAnimationFrame(() => {
+    updateHeroTitle();
+    titleTicking = false;
+  });
+}
+
+window.addEventListener("scroll", onTitleScroll, { passive: true });
+
+window.addEventListener("resize", () => {
+  fitTitle();
+  updateHeroTitle();
+});
+
+// После загрузки шрифта метрики меняются — пересчитываем под реальные глифы
+document.fonts.ready.then(fitTitle);
+document.fonts.addEventListener("loadingdone", fitTitle);
+
+fitTitle();
+updateHeroTitle();

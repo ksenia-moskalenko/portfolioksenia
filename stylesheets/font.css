@@ -1,1 +1,22 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+/* ---------- FONTS ----------
+   Google Fonts is loaded via <link> in index.html (see the preconnect
+   tags there) so the font request starts before this stylesheet parses.
+   This file owns the font stack; nothing else should declare a family. */
+
+:root {
+  --font-sans: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  font-family: var(--font-sans);
+  font-optical-sizing: auto;
+  font-synthesis-weight: none;
+}
+
+.manrope {
+  font-family: var(--font-sans);
+  font-optical-sizing: auto;
+  font-weight: 200 800;
+  font-style: normal;
+}
