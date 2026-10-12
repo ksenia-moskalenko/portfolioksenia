@@ -163,10 +163,9 @@ a {
   content: "";
   position: absolute;
   inset: 0;
-  background: #0a0a0a url("../images/hero.jpg") left top / 48% auto no-repeat;
-  filter: grayscale(100%);
-  z-index: -1;
+  background: transparent;
   pointer-events: none;
+  z-index: -1;
 }
 
 .project-list {
