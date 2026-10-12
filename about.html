@@ -14,9 +14,9 @@
     .about:before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.06);pointer-events:none}
     .top,.intro,.bottom{position:relative;z-index:1}
     .top{display:grid;grid-template-columns:1.3fr .6fr .7fr 1fr;gap:24px;padding:28px max(24px,13.6vw) 0;font-size:clamp(14px,1.5vw,22px);line-height:1.22;font-weight:300;white-space:nowrap}
-    .top a:hover{text-decoration:underline;text-underline-offset:3px}
-    .back{position:absolute;right:40px;top:28px;text-align:right;font-size:14px;line-height:1.2}
-    .back span{font-size:1.6em;vertical-align:-.08em;margin-right:12px}
+    .top a:hover:not(.back){text-decoration:underline;text-underline-offset:3px}.back,.back:hover,.back:focus{text-decoration:none!important}
+    .back{position:fixed;right:40px;top:28px;z-index:50;text-align:right;font-size:14px;line-height:1.2;display:flex;align-items:center;gap:12px}
+    .back .arrow{font-size:1.6em;line-height:1;margin:0}
     .intro{align-self:flex-start;margin:42px 13.6vw 0;max-width:840px;font-size:clamp(11px,.93vw,14px);line-height:1.1;font-weight:300}
     .bottom{margin-top:auto}
     .marquee{width:100%;overflow:hidden;padding:0 0 5px}
@@ -34,7 +34,7 @@
     <div>Moscalenko Ksenia</div>
     <div><a href="mailto:">email</a><br><a href="https://t.me/" target="_blank" rel="noopener">telegram</a></div>
     <div><a href="https://instagram.com/" target="_blank" rel="noopener">instagram</a><br><a href="https://pinterest.com/" target="_blank" rel="noopener">pinterest</a></div>
-    <a class="back" href="index.html"><span aria-hidden="true">←</span> go back</a>
+    <a class="back" href="index.html"><span class="arrow" aria-hidden="true">←</span><span class="back-label">go back</span></a>
   </header>
   <p class="intro">I'm a second-year Design &amp; Programming student at HSE University, learning to bridge the gap between visual storytelling and technical execution. With one foot in Figma and the other in VS Code, I'm passionate about creating work that doesn't just look good — but works seamlessly. As a young designer, I'm constantly experimenting, iterating, and finding new ways to bring ideas to life.</p>
   <div class="bottom">
@@ -48,6 +48,32 @@
   </div>
 </main>
 <script>
+  const backLabel = document.querySelector(".back-label");
+  if (backLabel) {
+    const original = backLabel.textContent;
+    const chars = "!<>-_\\/[]{}—=+*^?#________";
+    let scrambleTimer;
+    document.querySelector(".back").addEventListener("mouseenter", () => {
+      clearInterval(scrambleTimer);
+      let frame = 0;
+      const frames = 20;
+      scrambleTimer = setInterval(() => {
+        frame++;
+        backLabel.textContent = [...original].map((char, i) =>
+          char === " " || frame > frames * i / original.length
+            ? char : chars[Math.floor(Math.random() * chars.length)]
+        ).join("");
+        if (frame >= frames) {
+          clearInterval(scrambleTimer);
+          backLabel.textContent = original;
+        }
+      }, 40);
+    });
+    document.querySelector(".back").addEventListener("mouseleave", () => {
+      clearInterval(scrambleTimer);
+      backLabel.textContent = original;
+    });
+  }
   const heading = document.querySelector(".headline span");
   function fitHeading() {
     if (!heading) return;
