@@ -143,15 +143,15 @@ a {
 /* ---------- PROJECTS (sticky) ---------- */
 .projects {
   position: relative;
-
-  margin-top: -10vh; /* ← подтягиваем секцию на высоту экрана вверх */
-  z-index: 2; /* ← проекты ложатся ПОВЕРХ hero */
+  height: 300vh;
+  margin-top: -10vh;
+  z-index: 2;
 }
 
 .projects-sticky {
   position: sticky;
   top: 0;
-  height: 80vw;
+  height: 100vh;
   width: 100%;
   overflow: hidden;
   z-index: 2;
@@ -160,7 +160,9 @@ a {
 .project-list {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
 }
 
 .project {
@@ -177,12 +179,23 @@ a {
   color: #fff;
 }
 
-/* Разное позиционирование для разнобоя, как в макете */
-.project[data-index="1"] .project-num {
-  top: 0%;
-  left: 30%;
-}
-.project[data-index="1"] .project-link {
+/* Проекты расположены свободно; при скролле весь список сдвигается вверх. */
+.project[data-index="1"] .project-num { top: 8vh; left: 30%; }
+.project[data-index="1"] .project-link { top: 12vh; left: 34%; }
+.project[data-index="2"] .project-num { top: 38vh; left: 55%; }
+.project[data-index="2"] .project-link { top: 42vh; left: 59%; }
+.project[data-index="3"] .project-num { top: 68vh; left: 26%; }
+.project[data-index="3"] .project-link { top: 72vh; left: 30%; }
+.project[data-index="4"] .project-num { top: 108vh; left: 64%; }
+.project[data-index="4"] .project-link { top: 112vh; left: 68%; }
+.project[data-index="5"] .project-num { top: 143vh; left: 40%; }
+.project[data-index="5"] .project-link { top: 147vh; left: 44%; }
+.project[data-index="6"] .project-num { top: 178vh; left: 20%; }
+.project[data-index="6"] .project-link { top: 182vh; left: 24%; }
+.project[data-index="7"] .project-num { top: 213vh; left: 64%; }
+.project[data-index="7"] .project-link { top: 217vh; left: 68%; }
+
+.project-link {
   top: 4%;
   left: 34%;
 }
@@ -336,4 +349,9 @@ a {
 /* Скрываем стандартный курсор при наведении на hover-image */
 .hover-image.visible ~ * {
   cursor: none;
+}
+
+/* Уменьшаем движение для пользователей с соответствующей настройкой. */
+@media (prefers-reduced-motion: reduce) {
+  .project-list { will-change: auto; }
 }
