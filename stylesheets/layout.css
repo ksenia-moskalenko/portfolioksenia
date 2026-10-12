@@ -87,16 +87,14 @@ a {
 }
 
 .hero-image {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 48%;
   height: auto;
   z-index: 0;
   pointer-events: none;
-  transition: opacity .2s ease;
 }
-body.projects-finished .hero-image { opacity: 0; visibility: hidden; }
 
 .hero-image img {
   width: 100%;
@@ -107,10 +105,10 @@ body.projects-finished .hero-image { opacity: 0; visibility: hidden; }
 
 .hero-title {
   position: absolute;
-  top: 43%;
+  top: 14vh;
   left: 0;
   width: 100%;
-  transform: translateY(-50%);
+  transform: none;
   font-size: clamp(80px, 18vw, 300px);
   font-weight: 800;
   line-height: 0.9;
@@ -132,24 +130,24 @@ body.projects-finished .hero-image { opacity: 0; visibility: hidden; }
    после scaleX слова наезжали бы друг на друга либо не доходили до краёв. */
 .title-part {
   position: absolute;
-  top: 3vw;
+  top: 0;
   will-change: transform;
 }
 
 .title-part:first-child {
   left: 10px;
-  transform-origin: left center;
+  transform-origin: left top;
 }
 
 .title-part:last-child {
   right: 10px;
-  transform-origin: right center;
+  transform-origin: right top;
 }
 
 /* ---------- PROJECTS (sticky) ---------- */
 .projects {
   position: relative;
-  height: 245vh;
+  height: 215vh;
   margin-top: -55vh;
   z-index: 2;
 }
@@ -162,6 +160,7 @@ body.projects-finished .hero-image { opacity: 0; visibility: hidden; }
   overflow: hidden;
   z-index: 2;
   isolation: isolate;
+  background: transparent;
 }
 
 /* Фотография остаётся под ссылками во время закреплённой прокрутки. */
