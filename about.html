@@ -122,7 +122,6 @@
       }
       .headline {
         margin: 0;
-        transform: translateY(0.14em);
         overflow: visible;
         font-family: Manrope, Arial, sans-serif;
         font-size: clamp(80px, 18vw, 300px);
@@ -283,7 +282,13 @@
         heading.style.transform = "none";
         const naturalWidth = heading.getBoundingClientRect().width;
         const scale = (window.innerWidth - 8) / naturalWidth;
-        heading.style.transform = "scaleX(" + scale + ")";
+        const headline = heading.parentElement;
+        const box = headline.getBoundingClientRect();
+        const availableHeight = window.innerHeight - box.top;
+        const naturalHeight = heading.getBoundingClientRect().height;
+        const scaleY = Math.max(1, availableHeight / Math.max(naturalHeight, 1));
+        heading.style.transformOrigin = "left top";
+        heading.style.transform = "scaleX(" + scale + ") scaleY(" + scaleY + ")";
       }
       document.fonts.ready.then(fitHeading);
       window.addEventListener("resize", fitHeading);
