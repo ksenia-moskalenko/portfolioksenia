@@ -143,7 +143,7 @@ a {
 /* ---------- PROJECTS (sticky) ---------- */
 .projects {
   position: relative;
-  height: 300vh;
+  height: 280vh;
   margin-top: -10vh;
   z-index: 2;
 }
@@ -194,65 +194,6 @@ a {
 .project[data-index="6"] .project-link { top: 182vh; left: 24%; }
 .project[data-index="7"] .project-num { top: 213vh; left: 64%; }
 .project[data-index="7"] .project-link { top: 217vh; left: 68%; }
-
-.project-link {
-  top: 4%;
-  left: 34%;
-}
-
-.project[data-index="2"] .project-num {
-  top: 19%;
-  left: 55%;
-}
-.project[data-index="2"] .project-link {
-  top: 23%;
-  left: 59%;
-}
-
-.project[data-index="3"] .project-num {
-  top: 35%;
-  left: 26%;
-}
-.project[data-index="3"] .project-link {
-  top: 39%;
-  left: 30%;
-}
-
-.project[data-index="4"] .project-num {
-  top: 50%;
-  left: 64%;
-}
-.project[data-index="4"] .project-link {
-  top: 54%;
-  left: 68%;
-}
-
-.project[data-index="5"] .project-num {
-  top: 67%;
-  left: 40%;
-}
-.project[data-index="5"] .project-link {
-  top: 71%;
-  left: 44%;
-}
-
-.project[data-index="6"] .project-num {
-  top: 85%;
-  left: 20%;
-}
-.project[data-index="6"] .project-link {
-  top: 89%;
-  left: 24%;
-}
-
-.project[data-index="7"] .project-num {
-  top: 89%;
-  left: 64%;
-}
-.project[data-index="7"] .project-link {
-  top: 93%;
-  left: 68%;
-}
 
 .project-link {
   position: absolute;
