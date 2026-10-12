@@ -151,9 +151,9 @@ const reduceMotion = window.matchMedia(
 // Насколько каждое слово уходит вниз при скролле, px. Оба слова движутся
 // только вниз, но с разной скоростью, поэтому они расходятся.
 // Первый элемент — KSENIA, второй — MOSKALENKO.
-const SPREAD_PX = [200, 200];
+const SPREAD_PX = [0, 0];
 // Насколько буквы вытягиваются по вертикали к концу скролла.
-const STRETCH_Y = 0.5;
+const TITLE_TARGET_HEIGHT = 0.82;
 
 let fitScaleX = 1;
 let spreadProgress = 0;
@@ -226,7 +226,11 @@ function fitTitle() {
 function renderTitle() {
   titleParts.forEach((part, i) => {
     const dy = reduceMotion ? 0 : spreadProgress * SPREAD_PX[i];
-    const sy = reduceMotion ? 1 : 1 + spreadProgress * STRETCH_Y;
+    const naturalHeight = part.getBoundingClientRect().height / (parseFloat(part.dataset.scaleY) || 1);
+    const targetScale = (window.innerHeight * TITLE_TARGET_HEIGHT) / Math.max(naturalHeight, 1);
+    const reveal = Math.min(1, spreadProgress / 0.45);
+    const sy = reduceMotion ? 1 : 1 + reveal * (targetScale - 1);
+    part.dataset.scaleY = String(sy);
 
     part.style.transform = `translateY(${dy}px) scaleX(${fitScaleX}) scaleY(${sy})`;
   });
@@ -288,8 +292,6 @@ function updateProjectsScroll() {
   const progress = Math.max(0, Math.min(1, -rect.top / scrollDistance));
   // Последний проект должен успеть полностью появиться до выхода из sticky.
   const travel = window.innerHeight * 1.35;
-  const finished = rect.bottom <= window.innerHeight * 0.05;
-  document.body.classList.toggle("projects-finished", finished);
   projectList.style.transform = `translate3d(0, ${-progress * travel}px, 0)`;
 }
 
