@@ -105,11 +105,11 @@ a {
 
 .hero-title {
   position: absolute;
-  top: 68vh;
+  top: 73vh;
   left: 0;
   width: 100%;
   transform: none;
-  font-size: clamp(80px, 18vw, 300px);
+  font-size: clamp(64px, 11vw, 190px);
   font-weight: 800;
   line-height: 0.9;
   letter-spacing: -0.05em;
