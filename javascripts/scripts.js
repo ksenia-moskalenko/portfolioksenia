@@ -153,7 +153,7 @@ const reduceMotion = window.matchMedia(
 // Первый элемент — KSENIA, второй — MOSKALENKO.
 const SPREAD_PX = [0, 0];
 // Насколько буквы вытягиваются по вертикали к концу скролла.
-const TITLE_TARGET_HEIGHT = 0.82;
+const TITLE_REVEAL_SCROLL = 0.48;
 
 let fitScaleX = 1;
 let spreadProgress = 0;
@@ -224,15 +224,16 @@ function fitTitle() {
 // и вертикальное раскрытие (translateY + scaleY) собираются вместе,
 // чтобы не затирать друг друга.
 function renderTitle() {
-  titleParts.forEach((part, i) => {
-    const dy = reduceMotion ? 0 : spreadProgress * SPREAD_PX[i];
-    const naturalHeight = part.getBoundingClientRect().height / (parseFloat(part.dataset.scaleY) || 1);
-    const targetScale = (window.innerHeight * TITLE_TARGET_HEIGHT) / Math.max(naturalHeight, 1);
-    const reveal = Math.min(1, spreadProgress / 0.45);
-    const sy = reduceMotion ? 1 : 1 + reveal * (targetScale - 1);
-    part.dataset.scaleY = String(sy);
+  if (!heroTitle) return;
+  const titleTop = heroTitle.getBoundingClientRect().top;
+  const availableHeight = Math.max(1, window.innerHeight - titleTop);
+  const reveal = reduceMotion ? 0 : Math.min(1, spreadProgress / TITLE_REVEAL_SCROLL);
 
-    part.style.transform = `translateY(${dy}px) scaleX(${fitScaleX}) scaleY(${sy})`;
+  titleParts.forEach((part) => {
+    const naturalHeight = parseFloat(getComputedStyle(part).fontSize) * 0.9;
+    const desiredScale = availableHeight / Math.max(1, naturalHeight);
+    const sy = 1 + reveal * (desiredScale - 1);
+    part.style.transform = `scaleX(${fitScaleX}) scaleY(${sy})`;
   });
 }
 
