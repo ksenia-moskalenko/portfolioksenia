@@ -225,15 +225,14 @@ function fitTitle() {
 // чтобы не затирать друг друга.
 function renderTitle() {
   if (!heroTitle) return;
-  const titleTop = heroTitle.getBoundingClientRect().top;
-  const availableHeight = Math.max(1, window.innerHeight - titleTop);
-  const reveal = reduceMotion ? 0 : Math.min(1, spreadProgress / TITLE_REVEAL_SCROLL);
-
+  const reveal = reduceMotion ? 0 : Math.min(1, spreadProgress / 0.55);
+  const scaleY = 1 + reveal * 0.6;
+  // Компенсируем уход hero вверх: имя остаётся у нижней части экрана,
+  // вместо того чтобы проходить по лицу на фотографии.
+  const holdY = Math.min(window.scrollY, window.innerHeight * 0.55);
+  heroTitle.style.transform = `translateY(${holdY}px)`;
   titleParts.forEach((part) => {
-    const naturalHeight = parseFloat(getComputedStyle(part).fontSize) * 0.9;
-    const desiredScale = availableHeight / Math.max(1, naturalHeight);
-    const sy = 1 + reveal * (desiredScale - 1);
-    part.style.transform = `scaleX(${fitScaleX}) scaleY(${sy})`;
+    part.style.transform = `scaleX(${fitScaleX}) scaleY(${scaleY})`;
   });
 }
 
