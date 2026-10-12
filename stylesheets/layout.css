@@ -101,7 +101,7 @@ a {
 
 .hero-title {
   position: absolute;
-  top: 50%;
+  top: 43%;
   left: 0;
   width: 100%;
   transform: translateY(-50%);
@@ -144,7 +144,7 @@ a {
 .projects {
   position: relative;
   height: 220vh;
-  margin-top: -10vh;
+  margin-top: -55vh;
   z-index: 2;
 }
 
@@ -155,6 +155,18 @@ a {
   width: 100%;
   overflow: hidden;
   z-index: 2;
+  isolation: isolate;
+}
+
+/* Фотография остаётся под ссылками во время закреплённой прокрутки. */
+.projects-sticky::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #0a0a0a url("../images/hero.jpg") left top / 48% auto no-repeat;
+  filter: grayscale(100%);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .project-list {
@@ -216,7 +228,7 @@ a {
 
 /* ---------- WHAT I DO / CONTACT ---------- */
 .what-i-do {
-  margin-top: 2vw;
+  margin-top: -2vw;
 }
 .what-i-do,
 .contact {
@@ -229,7 +241,7 @@ a {
 }
 
 .big-heading {
-  font-size: clamp(60px, 12vw, 200px);
+  font-size: clamp(60px, 13.5vw, 220px);
   font-weight: 800;
   line-height: 0.9;
   letter-spacing: -0.05em;
