@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About — Ksenia Moskalenko</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#666;color:#fff;font-family:Manrope,Arial,sans-serif}
+    a{color:inherit;text-decoration:none}
+    .about{position:relative;min-height:100svh;overflow:hidden;background:#777 url("images/about.jpg") center center / cover no-repeat;display:flex;flex-direction:column;justify-content:space-between}
+    .about:before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.06);pointer-events:none}
+    .top,.intro,.bottom{position:relative;z-index:1}
+    .top{display:grid;grid-template-columns:1.3fr .6fr .7fr 1fr;gap:24px;padding:28px max(24px,13.6vw) 0;font-size:clamp(14px,1.5vw,22px);line-height:1.22;font-weight:300;white-space:nowrap}
+    .top a:hover{text-decoration:underline;text-underline-offset:3px}
+    .back{text-align:right}
+    .back span{font-size:1.6em;vertical-align:-.08em;margin-right:12px}
+    .intro{align-self:flex-start;margin:42px 13.6vw 0;max-width:840px;font-size:clamp(11px,.93vw,14px);line-height:1.1;font-weight:300}
+    .bottom{margin-top:auto}
+    .skills{display:flex;justify-content:space-between;gap:18px;padding:0 1.6vw 5px;font-size:clamp(12px,1.6vw,23px);white-space:nowrap;font-weight:300}
+    .headline{margin:0;font-family:Impact,"Arial Narrow",sans-serif;font-stretch:condensed;font-size:clamp(74px,19.6vw,320px);font-weight:900;letter-spacing:-.055em;line-height:.78;white-space:nowrap;text-align:center;transform:scaleX(.94);transform-origin:center bottom}
+    @media(max-width:750px){.about{min-height:100svh;background-position:54% center}.top{grid-template-columns:1fr 1fr;gap:18px;padding:20px;font-size:14px}.back{text-align:left}.intro{margin:35px 20px 0;font-size:12px}.skills{overflow:hidden;justify-content:flex-start;font-size:13px}.headline{font-size:21vw;line-height:.86;letter-spacing:-.06em}}
+  </style>
+</head>
+<body>
+<main class="about">
+  <header class="top">
+    <div>Moscalenko Ksenia</div>
+    <div><a href="mailto:">email</a><br><a href="https://t.me/" target="_blank" rel="noopener">telegram</a></div>
+    <div><a href="https://instagram.com/" target="_blank" rel="noopener">instagram</a><br><a href="https://pinterest.com/" target="_blank" rel="noopener">pinterest</a></div>
+    <a class="back" href="index.html"><span aria-hidden="true">←</span> go back</a>
+  </header>
+  <p class="intro">I'm a second-year Design &amp; Programming student at HSE University, learning to bridge the gap between visual storytelling and technical execution. With one foot in Figma and the other in VS Code, I'm passionate about creating work that doesn't just look good — but works seamlessly. As a young designer, I'm constantly experimenting, iterating, and finding new ways to bring ideas to life.</p>
+  <div class="bottom">
+    <div class="skills" aria-label="Skills"><span>Photoshop</span><span>Illustrator</span><span>InDesign</span><span>Figma</span><span>HTML/CSS</span><span>JS</span><span>Photoshop</span><span>Illustrator</span><span>InDesign</span><span>Figma</span></div>
+    <h1 class="headline">ALWAYS OPEN TO WORK</h1>
+  </div>
+</main>
+</body>
+</html>
