@@ -272,3 +272,34 @@ document.fonts.addEventListener("loadingdone", fitTitle);
 
 fitTitle();
 updateHeroTitle();
+
+
+/* =========================================================
+   6. ЗАКРЕПЛЁННАЯ ПРОКРУТКА СПИСКА ПРОЕКТОВ
+   ========================================================= */
+const projectsSection = document.querySelector(".projects");
+const projectList = document.getElementById("projectList");
+let projectsTicking = false;
+
+function updateProjectsScroll() {
+  if (!projectsSection || !projectList) return;
+  const rect = projectsSection.getBoundingClientRect();
+  const scrollDistance = Math.max(projectsSection.offsetHeight - window.innerHeight, 1);
+  const progress = Math.max(0, Math.min(1, -rect.top / scrollDistance));
+  // Последний проект должен успеть полностью появиться до выхода из sticky.
+  const travel = window.innerHeight * 1.55;
+  projectList.style.transform = `translate3d(0, ${-progress * travel}px, 0)`;
+}
+
+function onProjectsScroll() {
+  if (projectsTicking) return;
+  projectsTicking = true;
+  requestAnimationFrame(() => {
+    updateProjectsScroll();
+    projectsTicking = false;
+  });
+}
+
+window.addEventListener("scroll", onProjectsScroll, { passive: true });
+window.addEventListener("resize", updateProjectsScroll);
+updateProjectsScroll();
