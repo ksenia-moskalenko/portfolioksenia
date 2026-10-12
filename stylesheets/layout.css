@@ -10,7 +10,7 @@ body {
   background: #000;
   color: #fff;
   font-family: var(--font-sans);
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -81,16 +81,22 @@ a {
 .hero {
   position: relative;
   width: 100%;
-  min-height: 100vh; /* минимум — высота экрана */
-  height: auto; /* НЕ фиксируем высоту, чтобы блок рос вместе с картинкой */
-  overflow: visible; /* Разрешаем контенту выходить за пределы первого экрана */
+  height: 100vh;
+  min-height: 100vh;
+  overflow: visible;
 }
 
 .hero-image {
-  position: relative; /* было absolute — теперь картинка сама задаёт высоту блока */
-  width: 48%; /* ширина, как ты просила */
-  height: auto; /* высота по пропорциям картинки */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 48%;
+  height: auto;
+  z-index: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
 }
+body.projects-finished .hero-image { opacity: 0; visibility: hidden; }
 
 .hero-image img {
   width: 100%;
@@ -143,7 +149,7 @@ a {
 /* ---------- PROJECTS (sticky) ---------- */
 .projects {
   position: relative;
-  height: 220vh;
+  height: 245vh;
   margin-top: -55vh;
   z-index: 2;
 }
