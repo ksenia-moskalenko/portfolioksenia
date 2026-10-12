@@ -192,20 +192,20 @@ a {
 }
 
 /* Проекты расположены свободно; при скролле весь список сдвигается вверх. */
-.project[data-index="1"] .project-num { top: 8vh; left: 30%; }
-.project[data-index="1"] .project-link { top: 12vh; left: 34%; }
-.project[data-index="2"] .project-num { top: 38vh; left: 55%; }
-.project[data-index="2"] .project-link { top: 42vh; left: 59%; }
-.project[data-index="3"] .project-num { top: 68vh; left: 26%; }
-.project[data-index="3"] .project-link { top: 72vh; left: 30%; }
-.project[data-index="4"] .project-num { top: 91vh; left: 64%; }
-.project[data-index="4"] .project-link { top: 95vh; left: 68%; }
-.project[data-index="5"] .project-num { top: 119vh; left: 40%; }
-.project[data-index="5"] .project-link { top: 123vh; left: 44%; }
-.project[data-index="6"] .project-num { top: 147vh; left: 20%; }
-.project[data-index="6"] .project-link { top: 151vh; left: 24%; }
-.project[data-index="7"] .project-num { top: 175vh; left: 64%; }
-.project[data-index="7"] .project-link { top: 179vh; left: 68%; }
+.project[data-index="1"] .project-num { top: 43vh; left: 30%; }
+.project[data-index="1"] .project-link { top: 47vh; left: 34%; }
+.project[data-index="2"] .project-num { top: 67vh; left: 49%; }
+.project[data-index="2"] .project-link { top: 71vh; left: 53%; }
+.project[data-index="3"] .project-num { top: 82vh; left: 25%; }
+.project[data-index="3"] .project-link { top: 86vh; left: 29%; }
+.project[data-index="4"] .project-num { top: 115vh; left: 64%; }
+.project[data-index="4"] .project-link { top: 119vh; left: 68%; }
+.project[data-index="5"] .project-num { top: 143vh; left: 40%; }
+.project[data-index="5"] .project-link { top: 147vh; left: 44%; }
+.project[data-index="6"] .project-num { top: 171vh; left: 20%; }
+.project[data-index="6"] .project-link { top: 175vh; left: 24%; }
+.project[data-index="7"] .project-num { top: 199vh; left: 64%; }
+.project[data-index="7"] .project-link { top: 203vh; left: 68%; }
 
 .project-link {
   position: absolute;
