@@ -31,9 +31,9 @@
 <body>
 <main class="about">
   <header class="top">
-    <div>Moscalenko Ksenia</div>
-    <div><a href="mailto:">email</a><br><a href="https://t.me/" target="_blank" rel="noopener">telegram</a></div>
-    <div><a href="https://instagram.com/" target="_blank" rel="noopener">instagram</a><br><a href="https://pinterest.com/" target="_blank" rel="noopener">pinterest</a></div>
+    <div><span class="scramble-text">Moscalenko Ksenia</span></div>
+    <div><a href="mailto:"><span class="scramble-text">email</span></a><br><a href="https://t.me/" target="_blank" rel="noopener"><span class="scramble-text">telegram</span></a></div>
+    <div><a href="https://instagram.com/" target="_blank" rel="noopener"><span class="scramble-text">instagram</span></a><br><a href="https://pinterest.com/" target="_blank" rel="noopener"><span class="scramble-text">pinterest</span></a></div>
     <a class="back" href="index.html"><span class="arrow" aria-hidden="true">←</span><span class="back-label">go back</span></a>
   </header>
   <p class="intro">I'm a second-year Design &amp; Programming student at HSE University, learning to bridge the gap between visual storytelling and technical execution. With one foot in Figma and the other in VS Code, I'm passionate about creating work that doesn't just look good — but works seamlessly. As a young designer, I'm constantly experimenting, iterating, and finding new ways to bring ideas to life.</p>
@@ -74,6 +74,29 @@
       backLabel.textContent = original;
     });
   }
+  document.querySelectorAll(".scramble-text").forEach(el => {
+    const original = el.textContent;
+    const symbols = "!<>-_\\/[]{}—=+*^?#________";
+    let timer;
+    const target = el.closest("a") || el;
+    target.addEventListener("mouseenter", () => {
+      clearInterval(timer);
+      let frame = 0;
+      const total = 20;
+      timer = setInterval(() => {
+        frame++;
+        el.textContent = [...original].map((letter, i) => (
+          letter === " " || frame > total * i / original.length
+            ? letter : symbols[Math.floor(Math.random() * symbols.length)]
+        )).join("");
+        if (frame >= total) { clearInterval(timer); el.textContent = original; }
+      }, 40);
+    });
+    target.addEventListener("mouseleave", () => {
+      clearInterval(timer);
+      el.textContent = original;
+    });
+  });
   const heading = document.querySelector(".headline span");
   function fitHeading() {
     if (!heading) return;
