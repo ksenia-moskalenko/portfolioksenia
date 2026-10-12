@@ -287,7 +287,7 @@ function updateProjectsScroll() {
   const scrollDistance = Math.max(projectsSection.offsetHeight - window.innerHeight, 1);
   const progress = Math.max(0, Math.min(1, -rect.top / scrollDistance));
   // Последний проект должен успеть полностью появиться до выхода из sticky.
-  const travel = window.innerHeight * 1.55;
+  const travel = window.innerHeight * 1.15;
   projectList.style.transform = `translate3d(0, ${-progress * travel}px, 0)`;
 }
 
